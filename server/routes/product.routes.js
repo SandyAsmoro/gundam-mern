@@ -38,14 +38,14 @@ router.post('/', authMiddleware, async (req, res) => {
     try {
         const { name, description, price, imageUrl } = req.body;
 
-        const newProduct = new Product({
+        const createProduct = new Product({
             name,
             description,
             price,
             imageUrl
         });
 
-        const savedProduct = await newProduct.save();
+        const savedProduct = await createProduct.save();
         res.status(201).json(savedProduct);
 
     } catch (error) {
