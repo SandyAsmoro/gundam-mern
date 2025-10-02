@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const authRoutes = require('./routes/auth.routes.js');
+const productRoutes = require('./routes/product.routes.js');
 require('dotenv').config();
 
 const app = express();
@@ -24,6 +26,12 @@ mongoose.connect(process.env.MONGO_URI, {
 app.get('/api', (req, res) => {
     res.json({ message: 'Halo dari server MERN!' });
 });
+
+// Semua rute di auth.routes.js akan diawali dengan /api/auth
+app.use('/api/auth', authRoutes);
+
+// Semua rute di product.routes.js akan diawali dengan /api/products
+app.use('/api/products', productRoutes);
 
 // Jalankan Server
 app.listen(PORT, () => {
